@@ -1,0 +1,2090 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Pro - Премиум Бизнес Шаблон</title>
+    
+    <!-- SEO оптимизация -->
+    <meta name="description" content="Nexus Pro - премиум бизнес шаблон с AI интеграцией, электронной коммерцией и аналитикой. Все в одном решении для вашего бизнеса.">
+    <meta name="keywords" content="бизнес шаблон, премиум, электронная коммерция, AI, аналитика">
+    <meta name="author" content="Nexus Pro">
+    
+    <!-- Премиум шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Иконочный шрифт -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- AOS библиотека для анимаций -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Стили -->
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #a5b4fc;
+            --secondary: #f59e0b;
+            --secondary-dark: #d97706;
+            --accent: #ec4899;
+            --accent-dark: #db2777;
+            --dark: #1f2937;
+            --darker: #111827;
+            --light: #f8fafc;
+            --gray: #6b7280;
+            --gray-light: #9ca3af;
+            --gray-lighter: #e5e7eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --border-radius: 12px;
+            --border-radius-lg: 20px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.15);
+            --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+            --transition: all 0.3s ease;
+            --transition-slow: all 0.5s ease;
+        }
+
+        /* Альтернативные цветовые схемы */
+        .theme-blue {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --primary-light: #93c5fd;
+        }
+
+        .theme-green {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #a7f3d0;
+        }
+
+        .theme-purple {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --primary-light: #c4b5fd;
+        }
+
+        .theme-dark {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --primary-light: #c4b5fd;
+            --dark: #f8fafc;
+            --darker: #e5e7eb;
+            --light: #1f2937;
+            --gray: #9ca3af;
+            --gray-light: #6b7280;
+            --gray-lighter: #374151;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+            background: var(--light);
+            transition: var(--transition-slow);
+        }
+
+        /* Контролы темы */
+        .theme-controls {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            z-index: 1001;
+            background: white;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        body.theme-dark .theme-controls {
+            background: var(--darker);
+        }
+
+        .theme-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid var(--gray-lighter);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-default { background: linear-gradient(45deg, #6366f1, #ec4899); }
+        .theme-blue-btn { background: linear-gradient(45deg, #3b82f6, #06b6d4); }
+        .theme-green-btn { background: linear-gradient(45deg, #10b981, #84cc16); }
+        .theme-purple-btn { background: linear-gradient(45deg, #8b5cf6, #d946ef); }
+        .theme-dark-btn { background: linear-gradient(45deg, #1f2937, #111827); }
+        
+        /* Навигация */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        body.theme-dark .navbar {
+            background: rgba(31, 41, 55, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .navbar.scrolled {
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        body.theme-dark .nav-links a {
+            color: var(--light);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-lg {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-gradient {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+        }
+
+        .btn-gradient:hover {
+            background: linear-gradient(45deg, var(--primary-dark), var(--accent-dark));
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Герой секция */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 12rem 0 8rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,0 1000,1000"/></svg>');
+        }
+
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-light {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .btn-light:hover {
+            background: #f8fafc;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Статистика */
+        .stats {
+            background: white;
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--gray-lighter);
+        }
+
+        body.theme-dark .stats {
+            background: var(--darker);
+            border-bottom: 1px solid var(--gray-lighter);
+        }
+        
+        .stats-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* Стек технологий */
+        .tech-stack {
+            padding: 4rem 0;
+            background: var(--light);
+        }
+
+        body.theme-dark .tech-stack {
+            background: var(--darker);
+        }
+
+        .tech-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .tech-badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .tech-badge {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        body.theme-dark .tech-badge {
+            background: var(--gray-lighter);
+            color: var(--light);
+        }
+
+        .tech-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .tech-badge i {
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+        
+        /* Особенности */
+        .features {
+            padding: 6rem 0;
+            background: var(--light);
+        }
+
+        body.theme-dark .features {
+            background: var(--darker);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.theme-dark .feature-card {
+            background: var(--gray-lighter);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-icon i {
+            font-size: 1.75rem;
+            color: var(--primary);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        body.theme-dark .trust-badges {
+            background: var(--gray-lighter);
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        body.theme-dark .trust-badge {
+            color: var(--light);
+        }
+
+        .trust-badge i {
+            color: var(--success);
+            font-size: 1.5rem;
+        }
+        
+        /* Как это работает */
+        .how-it-works {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        body.theme-dark .how-it-works {
+            background: var(--darker);
+        }
+        
+        .steps {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .step h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        /* Портфолио */
+        .portfolio {
+            padding: 6rem 0;
+            background: var(--light);
+        }
+
+        body.theme-dark .portfolio {
+            background: var(--darker);
+        }
+        
+        .portfolio-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .portfolio-item {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        body.theme-dark .portfolio-item {
+            background: var(--gray-lighter);
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .portfolio-img {
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-img::before {
+            opacity: 1;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-content {
+            padding: 1.5rem;
+        }
+        
+        .portfolio-content h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Цены */
+        .pricing {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        body.theme-dark .pricing {
+            background: var(--darker);
+        }
+        
+        .pricing-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 2px solid transparent;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        body.theme-dark .pricing-card {
+            background: var(--gray-lighter);
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.featured::before {
+            content: 'Популярный';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 2rem;
+        }
+
+        body.theme-dark .price {
+            color: var(--light);
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+        
+        .pricing-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--gray-lighter);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .pricing-features li i {
+            color: var(--success);
+        }
+
+        .pricing-features li.disabled i {
+            color: var(--gray-light);
+        }
+        
+        /* Отзывы */
+        .testimonials {
+            padding: 6rem 0;
+            background: var(--light);
+        }
+
+        body.theme-dark .testimonials {
+            background: var(--darker);
+        }
+        
+        .testimonials-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        body.theme-dark .testimonial-card {
+            background: var(--gray-lighter);
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.2;
+            font-family: serif;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+        
+        .author-info h4 {
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        /* Админ-панель */
+        .admin-preview {
+            padding: 6rem 0;
+            background: var(--light);
+        }
+
+        body.theme-dark .admin-preview {
+            background: var(--darker);
+        }
+
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .admin-demo {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            min-height: 600px;
+            margin-top: 3rem;
+            overflow: hidden;
+        }
+
+        body.theme-dark .admin-demo {
+            background: var(--gray-lighter);
+        }
+
+        .admin-sidebar {
+            width: 250px;
+            background: var(--darker);
+            color: white;
+            padding: 2rem 1rem;
+        }
+
+        .admin-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+
+        .admin-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-item {
+            color: var(--gray-light);
+            text-decoration: none;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .admin-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        body.theme-dark .stat-card {
+            background: var(--darker);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .stat-info h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-trend {
+            margin-left: auto;
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .stat-trend.up {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        /* Видео-туториалы */
+        .video-tutorials {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        body.theme-dark .video-tutorials {
+            background: var(--darker);
+        }
+
+        .tutorials-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .tutorial-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        body.theme-dark .tutorial-card {
+            background: var(--gray-lighter);
+        }
+
+        .tutorial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .video-placeholder {
+            position: relative;
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .video-placeholder i {
+            position: absolute;
+            z-index: 2;
+            opacity: 0.9;
+        }
+
+        .tutorial-content {
+            padding: 1.5rem;
+        }
+
+        .tutorial-content h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .tutorial-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+
+        .tutorials-cta {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .tutorials-cta h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* FAQ */
+        .faq {
+            padding: 6rem 0;
+            background: var(--light);
+        }
+
+        body.theme-dark .faq {
+            background: var(--darker);
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        body.theme-dark .faq-item {
+            background: var(--gray-lighter);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            background: var(--light);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        body.theme-dark .faq-question {
+            background: var(--darker);
+        }
+        
+        .faq-question:hover {
+            background: #f1f5f9;
+        }
+
+        body.theme-dark .faq-question:hover {
+            background: var(--gray);
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 1.5rem;
+            max-height: 500px;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        /* CTA */
+        .cta {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .cta p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Футер */
+        .footer {
+            background: var(--darker);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-column h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 2rem 0;
+            text-align: center;
+            border-top: 1px solid #374151;
+            margin-top: 3rem;
+            color: var(--gray-light);
+        }
+
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .theme-controls {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .features-grid,
+            .pricing-grid,
+            .testimonials-grid,
+            .portfolio-grid,
+            .tutorials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trust-badges {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .admin-demo {
+                flex-direction: column;
+            }
+
+            .admin-sidebar {
+                width: 100%;
+                border-radius: 12px 12px 0 0;
+            }
+
+            .admin-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="theme-default">
+    <!-- Контролы темы -->
+    <div class="theme-controls">
+        <div class="theme-btn theme-default" data-theme="default" title="Стандартная тема"></div>
+        <div class="theme-btn theme-blue-btn" data-theme="blue" title="Синяя тема"></div>
+        <div class="theme-btn theme-green-btn" data-theme="green" title="Зеленая тема"></div>
+        <div class="theme-btn theme-purple-btn" data-theme="purple" title="Фиолетовая тема"></div>
+        <div class="theme-btn theme-dark-btn" data-theme="dark" title="Темная тема"></div>
+    </div>
+
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-cube"></i>
+                Nexus Pro
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#features">Возможности</a></li>
+                <li><a href="#tech">Технологии</a></li>
+                <li><a href="#how-it-works">Как это работает</a></li>
+                <li><a href="#portfolio">Портфолио</a></li>
+                <li><a href="#pricing">Цены</a></li>
+                <li><a href="#admin">Админ-панель</a></li>
+                <li><a href="#tutorials">Туториалы</a></li>
+                <li><a href="#testimonials">Отзывы</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+            
+            <div class="nav-buttons">
+                <a href="#" class="btn btn-outline">Войти</a>
+                <a href="#" class="btn btn-primary">Начать бесплатно</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Герой секция -->
+    <section class="hero">
+        <div class="hero-particles" id="heroParticles"></div>
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Премиум решения для вашего бизнеса</h1>
+            <p>Современная платформа с искусственным интеллектом для роста вашей компании. Все в одном месте - аналитика, автоматизация, электронная коммерция.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-light btn-lg pulse">
+                    <i class="fas fa-rocket"></i>
+                    Начать 14-дневный пробный период
+                </a>
+                <a href="#" class="btn btn-outline btn-lg" style="background: rgba(255,255,255,0.1); color: white; border-color: white;">
+                    <i class="fas fa-play-circle"></i>
+                    Смотреть демо
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Статистика -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Довольных клиентов</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">Успешных проектов</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Поддержка клиентов</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                <div class="stat-number">5.0</div>
+                <div class="stat-label">Рейтинг на маркетплейсах</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Стек технологий -->
+    <section class="tech-stack" id="tech">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Поддерживаемые технологии</h2>
+            <p>Интегрируется с популярными CMS и фреймворками</p>
+        </div>
+        <div class="tech-container">
+            <div class="tech-badges">
+                <div class="tech-badge" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fab fa-wordpress"></i>
+                    WordPress
+                </div>
+                <div class="tech-badge" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fab fa-joomla"></i>
+                    Joomla
+                </div>
+                <div class="tech-badge" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-shopping-cart"></i>
+                    OpenCart
+                </div>
+                <div class="tech-badge" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fab fa-react"></i>
+                    React
+                </div>
+                <div class="tech-badge" data-aos="fade-up" data-aos-delay="500">
+                    <i class="fab fa-vuejs"></i>
+                    Vue.js
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Особенности -->
+    <section class="features" id="features">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Мощные возможности</h2>
+            <p>Все инструменты, необходимые для масштабирования вашего бизнеса</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Искусственный интеллект</h3>
+                <p>Автоматизируйте процессы с помощью AI-ассистента, который учится на ваших данных и предлагает оптимизации.</p>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-network"></i>
+                </div>
+                <h3>Аналитика в реальном времени</h3>
+                <p>Получайте глубокие инсайты о вашем бизнесе с помощью продвинутой аналитики и дашбордов.</p>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Безопасность предприятия</h3>
+                <p>Защитите свои данные с помощью многоуровневой системы безопасности, шифрования и регулярных аудитов.</p>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="feature-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h3>Электронная коммерция</h3>
+                <p>Полнофункциональная платформа для онлайн-продаж с интеграцией платежных систем и управлением запасами.</p>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Мобильная оптимизация</h3>
+                <p>Полностью адаптивный дизайн, который идеально работает на всех устройствах и платформах.</p>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>Премиум поддержка</h3>
+                <p>Приоритетная техническая поддержка 24/7, персональный менеджер и обучающие материалы.</p>
+            </div>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="trust-badges" data-aos="fade-up">
+            <div class="trust-badge">
+                <i class="fas fa-shield-check"></i>
+                <span>Гарантия возврата 30 дней</span>
+            </div>
+            <div class="trust-badge">
+                <i class="fas fa-lock"></i>
+                <span>Безопасная оплата</span>
+            </div>
+            <div class="trust-badge">
+                <i class="fas fa-download"></i>
+                <span>Мгновенная доставка</span>
+            </div>
+            <div class="trust-badge">
+                <i class="fas fa-sync"></i>
+                <span>Бесплатные обновления</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Как это работает -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Как это работает</h2>
+            <p>Простой процесс от начала до результата</p>
+        </div>
+        
+        <div class="steps">
+            <div class="step" data-aos="fade-up" data-aos-delay="100">
+                <div class="step-number">1</div>
+                <h3>Регистрация</h3>
+                <p>Создайте аккаунт и выберите подходящий тарифный план для вашего бизнеса.</p>
+            </div>
+            
+            <div class="step" data-aos="fade-up" data-aos-delay="200">
+                <div class="step-number">2</div>
+                <h3>Настройка</h3>
+                <p>Настройте платформу под свои нужды с помощью интуитивного интерфейса.</p>
+            </div>
+            
+            <div class="step" data-aos="fade-up" data-aos-delay="300">
+                <div class="step-number">3</div>
+                <h3>Запуск</h3>
+                <p>Запустите свой проект и начните привлекать клиентов уже сегодня.</p>
+            </div>
+            
+            <div class="step" data-aos="fade-up" data-aos-delay="400">
+                <div class="step-number">4</div>
+                <h3>Рост</h3>
+                <p>Используйте аналитику и AI-рекомендации для постоянного роста бизнеса.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Портфолио -->
+    <section class="portfolio" id="portfolio">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Наши работы</h2>
+            <p>Примеры успешных проектов, созданных на нашей платформе</p>
+        </div>
+        
+        <div class="portfolio-grid">
+            <div class="portfolio-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="portfolio-img">
+                    <i class="fas fa-shopping-bag"></i>
+                    <div class="portfolio-overlay">
+                        <a href="#" class="btn btn-light">Подробнее</a>
+                    </div>
+                </div>
+                <div class="portfolio-content">
+                    <h3>Интернет-магазин модной одежды</h3>
+                    <p>Увеличение конверсии на 45% за 3 месяца</p>
+                </div>
+            </div>
+            
+            <div class="portfolio-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="portfolio-img">
+                    <i class="fas fa-laptop-code"></i>
+                    <div class="portfolio-overlay">
+                        <a href="#" class="btn btn-light">Подробнее</a>
+                    </div>
+                </div>
+                <div class="portfolio-content">
+                    <h3>Корпоративный портал</h3>
+                    <p>Автоматизация бизнес-процессов для компании из 200+ сотрудников</p>
+                </div>
+            </div>
+            
+            <div class="portfolio-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="portfolio-img">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div class="portfolio-overlay">
+                        <a href="#" class="btn btn-light">Подробнее</a>
+                    </div>
+                </div>
+                <div class="portfolio-content">
+                    <h3>Образовательная платформа</h3>
+                    <p>Онлайн-курсы для 10,000+ студентов с системой автоматической проверки</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Цены -->
+    <section class="pricing" id="pricing">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Прозрачные цены</h2>
+            <p>Выберите план, который подходит именно вам. Все планы включают 14-дневный пробный период.</p>
+        </div>
+        
+        <div class="pricing-grid">
+            <div class="pricing-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Старт</h3>
+                <div class="price">$29<span>/месяц</span></div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> До 5 пользователей</li>
+                    <li><i class="fas fa-check"></i> 10GB хранилище</li>
+                    <li><i class="fas fa-check"></i> Базовая аналитика</li>
+                    <li><i class="fas fa-check"></i> Поддержка по email</li>
+                    <li><i class="fas fa-check"></i> До 10 проектов</li>
+                    <li class="disabled"><i class="fas fa-times"></i> AI-ассистент</li>
+                </ul>
+                <a href="#" class="btn btn-outline">Начать</a>
+            </div>
+            
+            <div class="pricing-card featured" data-aos="fade-up" data-aos-delay="200">
+                <h3>Профессионал</h3>
+                <div class="price">$79<span>/месяц</span></div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> До 20 пользователей</li>
+                    <li><i class="fas fa-check"></i> 100GB хранилище</li>
+                    <li><i class="fas fa-check"></i> Продвинутая аналитика</li>
+                    <li><i class="fas fa-check"></i> Приоритетная поддержка</li>
+                    <li><i class="fas fa-check"></i> Неограниченные проекты</li>
+                    <li><i class="fas fa-check"></i> AI-ассистент</li>
+                </ul>
+                <a href="#" class="btn btn-primary">Попробовать бесплатно</a>
+            </div>
+            
+            <div class="pricing-card" data-aos="fade-up" data-aos-delay="300">
+                <h3>Предприятие</h3>
+                <div class="price">$199<span>/месяц</span></div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Неограниченные пользователи</li>
+                    <li><i class="fas fa-check"></i> 1TB хранилище</li>
+                    <li><i class="fas fa-check"></i> Расширенная аналитика</li>
+                    <li><i class="fas fa-check"></i> 24/7 поддержка</li>
+                    <li><i class="fas fa-check"></i> Кастомные интеграции</li>
+                    <li><i class="fas fa-check"></i> Выделенный менеджер</li>
+                </ul>
+                <a href="#" class="btn btn-outline">Связаться с продажами</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Админ-панель -->
+    <section class="admin-preview" id="admin">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Мощная админ-панель</h2>
+            <p>Полный контроль над вашим бизнесом в одном месте</p>
+        </div>
+        
+        <div class="admin-container">
+            <div class="admin-demo" data-aos="fade-up">
+                <div class="admin-sidebar">
+                    <div class="admin-logo">
+                        <i class="fas fa-cube"></i>
+                        <span>Nexus Admin</span>
+                    </div>
+                    <nav class="admin-nav">
+                        <a href="#" class="nav-item active">
+                            <i class="fas fa-tachometer-alt"></i>
+                            Дашборд
+                        </a>
+                        <a href="#" class="nav-item">
+                            <i class="fas fa-users"></i>
+                            Пользователи
+                        </a>
+                        <a href="#" class="nav-item">
+                            <i class="fas fa-chart-line"></i>
+                            Аналитика
+                        </a>
+                        <a href="#" class="nav-item">
+                            <i class="fas fa-cog"></i>
+                            Настройки
+                        </a>
+                    </nav>
+                </div>
+
+                <div class="admin-content">
+                    <div class="admin-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>1,247</h3>
+                                <p>Пользователи</p>
+                            </div>
+                            <div class="stat-trend up">
+                                +12.5%
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>$45,289</h3>
+                                <p>Доход</p>
+                            </div>
+                            <div class="stat-trend up">
+                                +8.3%
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>89</h3>
+                                <p>Проекты</p>
+                            </div>
+                            <div class="stat-trend up">
+                                +15.2%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Видео-туториалы -->
+    <section class="video-tutorials" id="tutorials">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Видео-туториалы</h2>
+            <p>Научитесь использовать все возможности Nexus Pro за 30 минут</p>
+        </div>
+
+        <div class="tutorials-grid">
+            <div class="tutorial-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="video-placeholder">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="tutorial-content">
+                    <h3>Быстрый старт</h3>
+                    <p>Установка и базовая настройка за 10 минут</p>
+                    <div class="tutorial-meta">
+                        <span class="duration"><i class="fas fa-clock"></i> 10:25</span>
+                        <span class="level"><i class="fas fa-signal"></i> Начальный</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tutorial-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="video-placeholder">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="tutorial-content">
+                    <h3>Админ-панель</h3>
+                    <p>Полный обзор возможностей управления</p>
+                    <div class="tutorial-meta">
+                        <span class="duration"><i class="fas fa-clock"></i> 15:40</span>
+                        <span class="level"><i class="fas fa-signal"></i> Средний</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tutorial-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="video-placeholder">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="tutorial-content">
+                    <h3>WordPress интеграция</h3>
+                    <p>Настройка темы и плагинов</p>
+                    <div class="tutorial-meta">
+                        <span class="duration"><i class="fas fa-clock"></i> 12:15</span>
+                        <span class="level"><i class="fas fa-signal"></i> Продвинутый</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tutorials-cta" data-aos="fade-up">
+            <h3>Получите полный доступ ко всем видео-материалам</h3>
+            <p>Более 50 обучающих видео, документация и поддержка</p>
+            <a href="#" class="btn btn-primary btn-lg">
+                <i class="fas fa-video"></i>
+                Получить доступ к видео
+            </a>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Что говорят наши клиенты</h2>
+            <p>Реальные отзывы от реальных клиентов</p>
+        </div>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="testimonial-content">
+                    "Nexus Pro полностью изменил подход к нашему бизнесу. Автоматизация сэкономила нам сотни часов ручной работы, а аналитика помогла увеличить доход на 40% за полгода."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">АИ</div>
+                    <div class="author-info">
+                        <h4>Алексей Иванов</h4>
+                        <p>CEO, TechSolutions</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonial-content">
+                    "Мы перепробовали множество платформ, но Nexus Pro - единственная, которая действительно масштабируется вместе с бизнесом. Поддержка всегда на высоте!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">МП</div>
+                    <div class="author-info">
+                        <h4>Мария Петрова</h4>
+                        <p>Основатель, FashionStore</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="testimonial-content">
+                    "AI-ассистент стал настоящим прорывом для нашего отдела маркетинга. Он не только автоматизирует рутину, но и предлагает действительно ценные инсайты."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">СК</div>
+                    <div class="author-info">
+                        <h4>Сергей Козлов</h4>
+                        <p>Директор по маркетингу, GlobalBrand</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Часто задаваемые вопросы</h2>
+            <p>Ответы на самые популярные вопросы о нашей платформе</p>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="faq-question">
+                    <span>Как долго длится пробный период?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Пробный период длится 14 дней. В течение этого времени у вас будет полный доступ ко всем функциям выбранного тарифного плана. Никакая кредитная карта не требуется для начала пробного периода.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="faq-question">
+                    <span>Могу ли я изменить тарифный план позже?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Да, вы можете изменить тарифный план в любой момент. При переходе на более высокий тариф разница будет пропорционально распределена. При переходе на более низкий тариф излишне уплаченные средства будут зачислены на ваш счет.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="faq-question">
+                    <span>Предоставляете ли вы техническую поддержку?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Да, мы предоставляем техническую поддержку для всех наших клиентов. На тарифе "Старт" поддержка осуществляется по email, на "Профессионал" - приоритетная поддержка, на "Предприятие" - выделенный менеджер и поддержка 24/7.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                <div class="faq-question">
+                    <span>Есть ли ограничения по трафику?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>На тарифе "Старт" есть ограничение в 10,000 посещений в месяц. На тарифах "Профессионал" и "Предприятие" ограничений по трафику нет. При превышении лимита мы свяжемся с вами для обсуждения перехода на более подходящий тариф.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Готовы начать?</h2>
+            <p>Присоединяйтесь к тысячам довольных клиентов, которые уже используют Nexus Pro для роста своего бизнеса</p>
+        </div>
+        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="100">
+            <a href="#" class="btn btn-light btn-lg">
+                <i class="fas fa-rocket"></i>
+                Начать бесплатно
+            </a>
+            <a href="#" class="btn btn-outline btn-lg" style="background: rgba(255,255,255,0.1); color: white; border-color: white;">
+                <i class="fas fa-calendar"></i>
+                Запланировать демо
+            </a>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>Nexus Pro</h4>
+                <p>Современные решения для современного бизнеса. Мы помогаем компаниям расти с помощью инновационных технологий и AI.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Продукт</h4>
+                <ul class="footer-links">
+                    <li><a href="#features">Возможности</a></li>
+                    <li><a href="#pricing">Цены</a></li>
+                    <li><a href="#integrations">Интеграции</a></li>
+                    <li><a href="#updates">Обновления</a></li>
+                    <li><a href="#status">Статус системы</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Ресурсы</h4>
+                <ul class="footer-links">
+                    <li><a href="#blog">Блог</a></li>
+                    <li><a href="#documentation">Документация</a></li>
+                    <li><a href="#webinars">Веббинары</a></li>
+                    <li><a href="#community">Сообщество</a></li>
+                    <li><a href="#api">API</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Компания</h4>
+                <ul class="footer-links">
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#careers">Карьера</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                    <li><a href="#partners">Партнеры</a></li>
+                    <li><a href="#legal">Правовая информация</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 Nexus Pro. Все права защищены. | <a href="#" style="color: var(--gray-light);">Политика конфиденциальности</a> | <a href="#" style="color: var(--gray-light);">Условия использования</a></p>
+        </div>
+    </footer>
+
+    <!-- Скрипты -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Инициализация AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+        
+        // Фиксированная навигация при скролле
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Аккордеон для FAQ
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Закрываем все другие открытые вопросы
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Переключаем текущий вопрос
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Плавная прокрутка для навигационных ссылок
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - 80;
+                        
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Переключение цветовых схем
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            themeButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const theme = btn.getAttribute('data-theme');
+                    document.body.className = `theme-${theme}`;
+                });
+            });
+
+            // Создание частиц для герой-секции
+            function createParticles() {
+                const container = document.getElementById('heroParticles');
+                const particleCount = 15;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    
+                    // Случайные свойства
+                    const size = Math.random() * 20 + 5;
+                    const left = Math.random() * 100;
+                    const animationDelay = Math.random() * 5;
+                    const animationDuration = Math.random() * 3 + 3;
+                    
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.left = `${left}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    particle.style.animationDelay = `${animationDelay}s`;
+                    particle.style.animationDuration = `${animationDuration}s`;
+                    particle.style.opacity = Math.random() * 0.5 + 0.1;
+                    
+                    container.appendChild(particle);
+                }
+            }
+
+            createParticles();
+        });
+    </script>
+</body>
+</html>
